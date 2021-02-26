@@ -1,4 +1,5 @@
 console.log('HELLO FROM CHE TSUMI')
+console.log(process.env.TEST_NAME)
 // const RssFeedEmitter = require('rss-feed-emitter')
 // const Queue = require('queue')
 // const Github = require('./lib/github')
