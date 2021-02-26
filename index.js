@@ -46,6 +46,8 @@ async function processHeadFeed() {
   const runDate = new Date(run.created_at).toISOString()
 
   feed.items.forEach(async (item) => {
+    console.log('runDate', runDate)
+    console.log('itemDate', item.isoDate)
     if (runDate > item.isoDate) {
       return
     }
