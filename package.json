@@ -24,8 +24,5 @@
   "devDependencies": {
     "eslint": "^4.7.2",
     "mocha": "^3.5.3"
-  },
-  "engines": {
-    "node": "8.5.x"
   }
 }
