@@ -76,10 +76,6 @@ export class Repository {
     this.git.checkout(branch, '-b')
   }
 
-  deleteBranch(branch: string) {
-    this.git.branch(branch, '-D')
-  }
-
   hasConflicts(hash: string) {
     const r = (this.git.cherryPick(hash) as any)
     console.log(r)

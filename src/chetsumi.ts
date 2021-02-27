@@ -124,7 +124,6 @@ export class CheTsumi {
   ) {
     this.repo.fetchHead()
     this.repo.updateDefaultBranch()
-    this.repo.deleteBranch(shortHash)
     this.repo.createBranch(shortHash)
 
     if (this.repo.hasConflicts(hash)) {
