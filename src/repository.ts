@@ -74,6 +74,7 @@ export class Repository {
 
   createBranch(branch: string) {
     this.git.checkout(branch, '-b')
+    this.git.branch('-al')
   }
 
   hasConflicts(hash: string) {
