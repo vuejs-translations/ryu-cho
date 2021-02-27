@@ -42,12 +42,10 @@ export class Repository {
     this.git.addRemote(this.head.url, this.head.name)
     this.git.config('user.name', `"${this.userName}"`)
     this.git.config('user.email', `"${this.email}"`)
-    console.log(this.git.exec('status'))
-    console.log(this.git.branch('-al'))
   }
 
   fetchHead() {
-    this.git.fetch(this.head.name, this.head.branch)
+    console.log(this.git.fetch(this.head.name, this.head.branch))
   }
 
   branchExists(branch: string) {
@@ -67,7 +65,7 @@ export class Repository {
   }
 
   mergeUpstream() {
-    this.git.merge(`${this.upstream.name}/${this.upstream.branch}`)
+    // this.git.merge(`${this.upstream.name}/${this.upstream.branch}`)
   }
 
   updateRemote(branch: string) {
