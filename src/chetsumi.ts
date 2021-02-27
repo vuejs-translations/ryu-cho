@@ -89,11 +89,11 @@ export class CheTsumi {
 
     // If `issueNo` is `null`, that means issue already exists. Stop here.
     if (issueNo === null) {
-      log('W', 'Issue already exists')
+      // log('W', 'Issue already exists')
       return
     }
 
-    await this.createPullRequest(hash, shortHash, feed, issueNo)
+    await this.createPullRequest(hash, shortHash, feed, issueNo!)
   }
 
   protected async createIssueIfNot(feed: Feed, hash: string) {
