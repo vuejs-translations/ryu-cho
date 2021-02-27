@@ -76,6 +76,14 @@ export interface UserConfig {
    * @example '889d985125558731c14278c3c5764bdcfb2389fd'
    */
   trackFrom: string
+
+  /**
+   * File path to track. If this option is set, commit not containing the
+   * path will be not tracked.
+   *
+   * @example 'docs/'
+   */
+  pathStartsWith?: string
 }
 
 export interface Config {
@@ -84,6 +92,7 @@ export interface Config {
   accessToken: string
   workflowName: string
   trackFrom: string
+  pathStartsWith?: string
 
   remote: {
     upstream: Remote
@@ -105,6 +114,7 @@ export function createConfig(config: UserConfig): Config {
     accessToken: config.accessToken,
     workflowName: config.workflowName ?? 'che-tsumi',
     trackFrom: config.trackFrom,
+    pathStartsWith: config.pathStartsWith,
 
     remote: {
       upstream: {

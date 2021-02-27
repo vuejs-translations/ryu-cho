@@ -71,9 +71,15 @@ export class CheTsumi {
       return
     }
 
-    log('I', `New commit on head repo: "${feed.contentSnippet}"`)
-
     const hash = extractBasename(feed.link)
+
+    // Check if the commit contains file path that we want to track.
+    // If not, do notghin and abort.
+    if (!(await this.containsValidFile(feed, hash))) {
+      return
+    }
+
+    log('I', `New commit on head repo: "${feed.contentSnippet}"`)
 
     // branch names consisting of 40 hex characters are not allowed
     const shortHash = hash.substr(0, 8)
@@ -94,6 +100,18 @@ export class CheTsumi {
     }
 
     await this.createPullRequest(hash, shortHash, feed, issueNo)
+  }
+
+  protected async containsValidFile(feed: Feed, hash: string) {
+    if (!this.config.pathStartsWith) {
+      return true
+    }
+
+    const res = await this.github.getCommit(this.head, hash)
+
+    return res.data.files!.some((file) => {
+      return file.filename!.startsWith(this.config.pathStartsWith!)
+    })
   }
 
   protected async createIssueIfNot(feed: Feed, hash: string) {

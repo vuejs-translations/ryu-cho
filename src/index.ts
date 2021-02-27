@@ -18,7 +18,8 @@ const config = createConfig({
   headRepo: process.env.HEAD_REPO!,
   headRepoBranch: process.env.HEAD_REPO_BRANCH,
   workflowName: process.env.WORKFLOW_NAME,
-  trackFrom: process.env.TRACK_FROM!
+  trackFrom: process.env.TRACK_FROM!,
+  pathStartsWith: process.env.PATH_STARTS_WITH
 })
 
 const chetsumi = new CheTsumi(config)

@@ -25,6 +25,14 @@ export class GitHub {
     })
   }
 
+  getCommit(remote: Remote, hash: string) {
+    return this.api.repos.getCommit({
+      owner: remote.owner,
+      repo: remote.name,
+      ref: hash
+    })
+  }
+
   createIssue(remote: Remote, options: CreateIssueOptions) {
     return this.api.issues.create({
       owner: remote.owner,
