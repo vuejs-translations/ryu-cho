@@ -19,8 +19,8 @@ export class Git {
     return this.exec(`remote add ${name} ${url}`)
   }
 
-  branch(branch: string, option?: string) {
-    return this.exec(`branch ${option} ${branch}`)
+  branch(option?: string) {
+    return this.exec(`branch ${option}`)
   }
 
   checkout(branch: string, option?: string) {
