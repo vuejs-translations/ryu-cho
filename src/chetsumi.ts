@@ -47,6 +47,7 @@ export class CheTsumi {
     const run = await this.getRun()
     const feed = await this.getFeed()
 console.log('run', run)
+console.log('feed', feed)
     for (const i in feed) {
       console.log('feed', feed[i].isoDate)
       console.log('feed', feed[i].contentSnippet)
