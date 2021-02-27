@@ -12,14 +12,13 @@ export class Rss {
   async get(remote: Remote, from: string) {
     const url = remote.url
     const branch = remote.branch
-    console.log(`${url}/commits/${branch}.atom`)
 
     const feed = await this.api.parseURL(`${url}/commits/${branch}.atom`)
-console.log('feed-api', feed)
+
     const target = feed.items.findIndex((item) => {
       return extractBasename(item.link!) === from
     })
 
-    return feed.items.slice(0, target + 1)
+    return target === -1 ? feed.items : feed.items.slice(0, target + 1)
   }
 }
