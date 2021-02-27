@@ -126,7 +126,7 @@ export class CheTsumi {
     this.repo.updateDefaultBranch()
     this.repo.deleteBranch(shortHash)
     this.repo.createBranch(shortHash)
-
+console.log('hash')
     if (this.repo.hasConflicts(hash)) {
       log('W', 'Conflicts occurred. Please make a pull request by yourself.')
       this.repo.reset()
