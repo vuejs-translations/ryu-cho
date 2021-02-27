@@ -34,6 +34,7 @@ export class CheTsumi {
 
     this.repo = new Repository({
       path: 'repo',
+      token: config.accessToken,
       userName: config.userName,
       email: config.email,
       upstream: this.upstream,

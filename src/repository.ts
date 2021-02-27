@@ -6,14 +6,17 @@ shell.config.silent = true
 
 export interface Options {
   path?: string
-  upstream: Remote
-  head: Remote
+  token: string
   userName: string
   email: string
+  upstream: Remote
+  head: Remote
 }
 
 export class Repository {
   path: string
+
+  token: string
 
   userName: string
 
@@ -27,6 +30,7 @@ export class Repository {
 
   constructor(options: Options) {
     this.path = options.path ?? '.'
+    this.token = options.token
     this.userName = options.userName
     this.email = options.email
     this.upstream = options.upstream
@@ -39,7 +43,7 @@ export class Repository {
     shell.cd(this.path)
     console.log(shell.pwd())
     console.log(this.upstream.url, this.upstream.name)
-    console.log(this.git.clone(this.upstream.url, this.upstream.name))
+    console.log(this.git.clone(this.userName, this.token, this.upstream.url, this.upstream.name))
     shell.cd(this.upstream.name)
     console.log(shell.pwd())
     console.log(shell.exec('ls -al'))

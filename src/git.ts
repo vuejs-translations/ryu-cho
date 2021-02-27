@@ -11,7 +11,9 @@ export class Git {
     return this.exec(`config ${prop} ${value}`)
   }
 
-  clone(url: string, name: string) {
+  clone(userName: string, token: string, url: string, name: string) {
+    url = url.replace('https://', `https://${userName}:${token}@`)
+
     return this.exec(`clone ${url} ${name}`)
   }
 
