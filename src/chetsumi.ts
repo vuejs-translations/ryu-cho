@@ -123,7 +123,7 @@ export class CheTsumi {
     issueNo: number
   ) {
     this.repo.fetchHead()
-    this.repo.updateDefaultBranch()
+    this.repo.checkoutDefaultBranch()
     this.repo.createBranch(shortHash)
 
     if (this.repo.hasConflicts(hash)) {

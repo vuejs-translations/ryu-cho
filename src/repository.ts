@@ -55,17 +55,8 @@ export class Repository {
     return stdout.replace('\n', '') === '1'
   }
 
-  updateDefaultBranch() {
-    this.checkoutDefaultBranch()
-    this.mergeUpstream()
-  }
-
   checkoutDefaultBranch() {
     this.git.checkout(this.upstream.branch)
-  }
-
-  mergeUpstream() {
-    // this.git.merge(`${this.upstream.name}/${this.upstream.branch}`)
   }
 
   updateRemote(branch: string) {
@@ -77,9 +68,7 @@ export class Repository {
   }
 
   hasConflicts(hash: string) {
-    const r = (this.git.cherryPick(hash) as any)
-    console.log(r)
-    return r.code !== 0
+    return (this.git.cherryPick(hash) as any).code !== 0
   }
 
   reset() {
