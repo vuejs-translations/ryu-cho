@@ -37,10 +37,10 @@ export class Repository {
 
   setup() {
     shell.cd(this.path)
-    shell.pwd()
+    console.log(shell.pwd())
     this.git.clone(this.upstream.url, this.upstream.name)
     shell.cd(this.upstream.name)
-    shell.pwd()
+    console.log(shell.pwd())
     this.git.addRemote(this.head.url, this.head.name)
     this.git.config('user.name', `"${this.userName}"`)
     this.git.config('user.email', `"${this.email}"`)
