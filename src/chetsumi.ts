@@ -95,10 +95,8 @@ console.log('run', run)
 
     const issueNo = await this.createIssueIfNot(feed, hash)
 
-    // If `issueNo` is `null`, that means issue already exists. Stop here.
     if (issueNo === null) {
       log('W', 'Issue already exists')
-      return
     }
 
     await this.createPullRequest(hash, shortHash, feed, issueNo)
@@ -140,7 +138,7 @@ console.log('run', run)
     hash: string,
     shortHash: string,
     feed: Feed,
-    issueNo: number
+    issueNo: number | null
   ) {
     this.repo.fetchHead()
     this.repo.checkoutDefaultBranch()
@@ -156,7 +154,8 @@ console.log('run', run)
 
     this.repo.updateRemote(shortHash)
 
-    const title = `${ removeHash(feed.contentSnippet) } (#${issueNo})`
+    const ref = issueNo ? '(#${issueNo})' : ''
+    const title = `${removeHash(feed.contentSnippet)} ${ref}`
     const body = `resolves #${issueNo}\r\nCherry picked from ${feed.link}`
     const branch = shortHash
 
