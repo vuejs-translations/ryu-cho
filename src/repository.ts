@@ -45,7 +45,7 @@ export class Repository {
   }
 
   fetchHead() {
-    console.log(this.git.fetch(this.head.name, this.head.branch))
+    this.git.fetch(this.head.name, this.head.branch)
   }
 
   branchExists(branch: string) {
@@ -74,7 +74,6 @@ export class Repository {
 
   createBranch(branch: string) {
     this.git.checkout(branch, '-b')
-    console.log(this.git.branch('-al'))
   }
 
   hasConflicts(hash: string) {
