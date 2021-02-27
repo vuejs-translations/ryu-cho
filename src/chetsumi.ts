@@ -90,10 +90,10 @@ export class CheTsumi {
     // If `issueNo` is `null`, that means issue already exists. Stop here.
     if (issueNo === null) {
       log('W', 'Issue already exists')
-      // return
+      return
     }
 
-    await this.createPullRequest(hash, shortHash, feed, issueNo!)
+    await this.createPullRequest(hash, shortHash, feed, issueNo)
   }
 
   protected async createIssueIfNot(feed: Feed, hash: string) {
@@ -126,7 +126,7 @@ export class CheTsumi {
     this.repo.updateDefaultBranch()
     this.repo.deleteBranch(shortHash)
     this.repo.createBranch(shortHash)
-console.log(hash)
+
     if (this.repo.hasConflicts(hash)) {
       log('W', 'Conflicts occurred. Please make a pull request by yourself.')
       this.repo.reset()
