@@ -81,7 +81,9 @@ export class Repository {
   }
 
   hasConflicts(hash: string) {
-    return (this.git.cherryPick(hash) as any).code !== 0
+    const r = (this.git.cherryPick(hash) as any)
+    console.log(r)
+    return r.code !== 0
   }
 
   reset() {
