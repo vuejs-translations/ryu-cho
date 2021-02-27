@@ -61,7 +61,7 @@ console.log('feed', feed)
       this.config.workflowName
     )
 
-    return new Date(run.created_at).toISOString()
+    return run ? new Date(run.created_at).toISOString() : ''
   }
 
   protected async getFeed() {

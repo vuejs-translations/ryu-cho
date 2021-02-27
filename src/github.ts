@@ -72,6 +72,6 @@ export class GitHub {
     // Return the second latest run from the list because the latest run is the
     // run that is executing right now. What we want is the "previous" run,
     // which is the second latest.
-    return runs[1]
+    return runs[1] ?? null
   }
 }
