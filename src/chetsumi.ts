@@ -6,6 +6,7 @@ import { Repository } from './repository'
 
 interface Feed {
   link: string
+  title: string
   contentSnippet: string
   isoDate: string
 }
@@ -122,7 +123,7 @@ console.log('run', run)
   }
 
   protected async createIssue(feed: Feed) {
-    const title = removeHash(feed.contentSnippet)
+    const title = removeHash(feed.title)
     const body = `New updates on head repo.\r\n${feed.link}`
 
     const res = await this.github.createIssue(this.upstream, {
