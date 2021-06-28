@@ -36,7 +36,7 @@ jobs:
 
           # The url for the upstream repo. This is the repository that you
           # set up Ryu-Cho. Required.
-          upstream-repo: git@github.com:vuejs-jp/vite-docs-ja.git
+          upstream-repo: https://github.com/vuejs-jp/vite-docs-ja.git
 
           # The branch for the upstream repo. Optional. Defaults to `main`.
           upstream-repo-branch: main

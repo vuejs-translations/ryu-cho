@@ -1,18 +1,18 @@
 import { assert } from './utils'
 import { createConfig } from './config'
-import { CheTsumi } from './chetsumi'
+import { RyuCho } from './ryu-cho'
 
+assert(!!process.env.ACCESS_TOKEN, '`accessToken` is required.')
 assert(!!process.env.USER_NAME, '`userName` is required.')
 assert(!!process.env.EMAIL, '`email` is required.')
-assert(!!process.env.ACCESS_TOKEN, '`accessToken` is required.')
 assert(!!process.env.UPSTREAM_REPO, '`upstreamRepo` is required.')
 assert(!!process.env.HEAD_REPO, '`headRepo` is required.')
 assert(!!process.env.TRACK_FROM, '`trackFrom` is required.')
 
 const config = createConfig({
+  accessToken: process.env.ACCESS_TOKEN!,
   userName: process.env.USER_NAME!,
   email: process.env.EMAIL!,
-  accessToken: process.env.ACCESS_TOKEN!,
   upstreamRepo: process.env.UPSTREAM_REPO!,
   upstreamRepoBranch: process.env.UPSTREAM_REPO_BRANCH,
   headRepo: process.env.HEAD_REPO!,
@@ -22,8 +22,10 @@ const config = createConfig({
   pathStartsWith: process.env.PATH_STARTS_WITH
 })
 
-const chetsumi = new CheTsumi(config)
+const ryuCho = new RyuCho(config)
 
-process.on('unhandledRejection', err => { console.error(err) })
+process.on('unhandledRejection', (err) => {
+  console.error(err)
+})
 
-chetsumi.start()
+ryuCho.start()

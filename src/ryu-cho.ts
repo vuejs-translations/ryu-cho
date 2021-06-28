@@ -11,17 +11,12 @@ interface Feed {
   isoDate: string
 }
 
-export class CheTsumi {
+export class RyuCho {
   config: Config
-
   upstream: Remote
-
   head: Remote
-
   rss: Rss
-
   github: GitHub
-
   repo: Repository
 
   constructor(config: Config) {
@@ -48,10 +43,8 @@ export class CheTsumi {
 
     const run = await this.getRun()
     const feed = await this.getFeed()
-console.log('run', run)
+
     for (const i in feed) {
-      console.log('feed', feed[i].isoDate)
-      console.log('feed', feed[i].contentSnippet)
       await this.processFeed(feed[i] as Feed, run)
     }
   }

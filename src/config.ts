@@ -64,7 +64,7 @@ export interface UserConfig {
    *
    * Uses `process.env.WORKFLOW_NAME` if it exists.
    *
-   * @default 'che-tsumi'
+   * @default 'ryu-cho'
    */
   workflowName?: string
 
@@ -112,7 +112,7 @@ export function createConfig(config: UserConfig): Config {
     userName: config.userName,
     email: config.email,
     accessToken: config.accessToken,
-    workflowName: config.workflowName ?? 'che-tsumi',
+    workflowName: config.workflowName ?? 'ryu-cho',
     trackFrom: config.trackFrom,
     pathStartsWith: config.pathStartsWith,
 

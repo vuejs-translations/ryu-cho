@@ -21,7 +21,7 @@ export class GitHub {
 
   searchIssue(remote: Remote, hash: string) {
     return this.api.search.issuesAndPullRequests({
-      q: `${hash} repo:${remote.owner}/${remote.name} type:issue`,
+      q: `${hash} repo:${remote.owner}/${remote.name} type:issue`
     })
   }
 
@@ -49,7 +49,7 @@ export class GitHub {
       title: options.title,
       body: options.body,
       head: `${remote.owner}:${options.branch}`,
-      base: remote.branch,
+      base: remote.branch
     })
   }
 
