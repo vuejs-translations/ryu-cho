@@ -55,6 +55,7 @@ runs:
         PATH_STARTS_WITH: ${{ inputs.path-starts-with }}
         WORKFLOW_NAME: ${{ inputs.workflow-name }}
       run: |
+        cd che-tsumi-next
         yarn install
         yarn start
       shell: bash
