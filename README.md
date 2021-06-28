@@ -29,10 +29,10 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
           # Git user name to use when making issues and PRs. Required.
-          username: kiaking
+          username: johndoe
 
           # Git email address to use when making issues and PRs. Required.
-          email: "kia.king.08@gmail.com"
+          email: "john.doe@example.com"
 
           # The url for the upstream repo. This is the repository that you
           # set up Ryu-Cho. Required.
