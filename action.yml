@@ -39,10 +39,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
-      with:
-        repository: vuejs-jp/che-tsumi-next
-        ref: main
+    - name: Checkout Ryu-Cho
+      run: ${{ github.action_path }}/scripts/checkout.sh
+      shell: bash
     - name: Run Ryu-Cho
       env:
         ACCESS_TOKEN: ${{ inputs.access-token }}
@@ -58,3 +57,4 @@ runs:
       run: |
         yarn install
         yarn start
+      shell: bash
