@@ -149,7 +149,7 @@ export class RyuCho {
 
     this.repo.updateRemote(shortHash)
 
-    const ref = issueNo ? '(#${issueNo})' : ''
+    const ref = issueNo ? `(#${issueNo})` : ''
     const title = `${removeHash(feed.contentSnippet)} ${ref}`
     const body = `resolves #${issueNo}\r\nCherry picked from ${feed.link}`
     const branch = shortHash
