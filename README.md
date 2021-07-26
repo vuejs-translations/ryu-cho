@@ -23,7 +23,7 @@ jobs:
     name: Ryu Cho
     runs-on: ubuntu-latest
     steps:
-      - uses: vuejs-jp/che-tsumi-next@v1
+      - uses: vuejs-translations/ryu-cho@v1
         with:
           # GitHub access token. Required.
           access-token: ${{ secrets.ACCESS_TOKEN }}
@@ -36,14 +36,14 @@ jobs:
 
           # The url for the upstream repo. This is the repository that you
           # set up Ryu-Cho. Required.
-          upstream-repo: https://github.com/vuejs-jp/vite-docs-ja.git
+          upstream-repo: https://github.com/vuejs-translations/docs-ja.git
 
           # The branch for the upstream repo. Optional. Defaults to `main`.
           upstream-repo-branch: main
 
           # The head repo to track. This is the repository you want to
           # take a diff. Required.
-          head-repo: https://github.com/vitejs/vite
+          head-repo: https://github.com/vuejs/docs.git
 
           # The branch for the head repo. Optional. Defaults to `main`.
           head-repo-branch: main
