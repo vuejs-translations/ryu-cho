@@ -3,6 +3,7 @@ import { Config, Remote } from './config'
 import { Rss } from './rss'
 import { GitHub } from './github'
 import { Repository } from './repository'
+import minimatch from 'minimatch'
 
 interface Feed {
   link: string
@@ -98,15 +99,35 @@ export class RyuCho {
   }
 
   protected async containsValidFile(feed: Feed, hash: string) {
-    if (!this.config.pathStartsWith) {
+    if (!this.config.pathStartsWith && !this.config.paths) {
       return true
     }
 
     const res = await this.github.getCommit(this.head, hash)
 
-    return res.data.files!.some((file) => {
-      return file.filename!.startsWith(this.config.pathStartsWith!)
-    })
+    let hasValidFile = false
+
+    if (this.config.pathStartsWith) {
+      log('W', 'pathStartsWith is deprecated. Use paths instead.')
+
+      hasValidFile = res.data.files!.some((file) => {
+        return file.filename!.startsWith(this.config.pathStartsWith!)
+      })
+    }
+
+    if (this.config.paths?.length) {
+      const findFile = (filename: string) => {
+        return this.config.paths.some((pattern) => {
+          return minimatch(filename, pattern, { partial: true } as any)
+        })
+      }
+
+      hasValidFile = res.data.files!.some((file) => {
+        return findFile(file.filename!)
+      })
+    }
+
+    return hasValidFile
   }
 
   protected async createIssueIfNot(feed: Feed, hash: string) {
