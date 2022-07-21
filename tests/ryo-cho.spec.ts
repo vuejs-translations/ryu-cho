@@ -68,17 +68,56 @@ function makeRyuCho(config: Partial<Config>, filenames: string[]) {
 }
 
 describe('RyuCho', () => {
-  it('config.paths[]', () => {
+  it('containsValidFile matches single config.paths[]', () => {
     const paths = ['/docs/**/*.md']
     const filenames = [
       '/docs/guide/index.md',
       '/docs/team.md',
-      '/CONTRIBUTING.md',
       '/README.md',
     ]
     const ryuCho = makeRyuCho({ paths }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
     expect(hasValidFile).resolves.toBe(true)
+  })
+
+  it('containsValidFile does not match any config.paths[]', () => {
+    const paths = ['/docs/**/*.md']
+    const filenames = [
+      '/docs/guide/index.txt',
+      '/docs/team.txt',
+      '/README.md',
+    ]
+    const ryuCho = makeRyuCho({ paths }, filenames)
+
+    const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
+    expect(hasValidFile).resolves.toBe(false)
+  })
+
+  it('containsValidFile matches multiple config.paths[]', () => {
+    const paths = ['/docs/**/*.md', '/README.md']
+    const filenames = [
+      '/docs/guide/index.md',
+      '/docs/team.md',
+      '/README.md',
+    ]
+    const ryuCho = makeRyuCho({ paths }, filenames)
+
+    const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
+    expect(hasValidFile).resolves.toBe(true)
+  })
+
+  it('containsValidFile excludes specified config.paths[]', () => {
+    // match all *.md files except README.md
+    const paths = ['**/!(README).md']
+    const filenames = [
+      '/docs/guide/index.txt',
+      '/docs/team.txt',
+      '/README.md',
+    ]
+    const ryuCho = makeRyuCho({ paths }, filenames)
+
+    const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
+    expect(hasValidFile).resolves.toBe(false)
   })
 })
