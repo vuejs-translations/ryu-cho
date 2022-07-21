@@ -5,7 +5,7 @@ import { GitHub } from './github'
 import { Repository } from './repository'
 import minimatch from 'minimatch'
 
-interface Feed {
+export interface Feed {
   link: string
   title: string
   contentSnippet: string
@@ -24,7 +24,6 @@ export class RyuCho {
     this.config = config
     this.upstream = config.remote.upstream
     this.head = config.remote.head
-
     this.rss = new Rss()
 
     this.github = new GitHub(config.accessToken)
