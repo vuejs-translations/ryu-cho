@@ -91,6 +91,11 @@ export interface UserConfig {
    * not containing the paths will not be tracked.
    */
   paths: string[]
+
+  /**
+   * File paths to exclude (glob patterns).
+   */
+  excludes: string[]
 }
 
 export interface Config {
@@ -102,6 +107,7 @@ export interface Config {
   /** @deprecated Use `paths` instead. */
   pathStartsWith?: string
   paths: string[]
+  excludes: string[]
 
   remote: {
     upstream: Remote
@@ -125,6 +131,7 @@ export function createConfig(config: UserConfig): Config {
     trackFrom: config.trackFrom,
     pathStartsWith: config.pathStartsWith,
     paths: config.paths,
+    excludes: config.excludes,
 
     remote: {
       upstream: {

@@ -13,6 +13,7 @@ const DEFAULT_CONFIG: Config = {
   trackFrom: '',
   pathStartsWith: '',
   paths: [],
+  excludes: [],
 
   remote: {
     upstream: {
@@ -116,6 +117,18 @@ describe('RyuCho', () => {
       '/README.md',
     ]
     const ryuCho = makeRyuCho({ paths }, filenames)
+
+    const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
+    expect(hasValidFile).resolves.toBe(false)
+  })
+
+  it('containsValidFile excludes specified config.excludes[]', () => {
+    const paths = ['**/*.md']
+    const filenames = [
+      '/README.md',
+    ]
+    const excludes = ['/README.md']
+    const ryuCho = makeRyuCho({ paths, excludes }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
     expect(hasValidFile).resolves.toBe(false)

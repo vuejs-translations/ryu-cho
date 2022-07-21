@@ -116,8 +116,15 @@ export class RyuCho {
 
     if (this.config.paths?.length) {
       const findFile = (filename: string) => {
+        const { excludes } = this.config
         return this.config.paths.some((pattern) => {
-          return minimatch(filename, pattern)
+          let matched = minimatch(filename, pattern)
+          if (excludes?.length) {
+            matched &&= !excludes.some((exclude) => {
+              return minimatch(filename, exclude, { nonegate: true })
+            })
+          }
+          return matched
         })
       }
 
