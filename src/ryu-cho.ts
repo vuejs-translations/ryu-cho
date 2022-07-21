@@ -71,7 +71,7 @@ export class RyuCho {
     const hash = extractBasename(feed.link)
 
     // Check if the commit contains file path that we want to track.
-    // If not, do notghin and abort.
+    // If not, do nothing and abort.
     if (!(await this.containsValidFile(feed, hash))) {
       return
     }
