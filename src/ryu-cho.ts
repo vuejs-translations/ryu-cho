@@ -117,7 +117,7 @@ export class RyuCho {
     if (this.config.paths?.length) {
       const findFile = (filename: string) => {
         return this.config.paths.some((pattern) => {
-          return minimatch(filename, pattern, { partial: true } as any)
+          return minimatch(filename, pattern)
         })
       }
 
