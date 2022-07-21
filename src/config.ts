@@ -82,7 +82,7 @@ export interface UserConfig {
    * path will be not tracked.
    *
    * @example 'docs/'
-   * @deprecated Use `paths` instead.
+   * @deprecated Use `includes` instead.
    */
   pathStartsWith?: string
 
@@ -90,7 +90,7 @@ export interface UserConfig {
    * File paths to track (glob patterns). If this option is set, commits
    * not containing the paths will not be tracked.
    */
-  paths: string[]
+  includes: string[]
 
   /**
    * File paths to exclude (glob patterns).
@@ -104,9 +104,9 @@ export interface Config {
   accessToken: string
   workflowName: string
   trackFrom: string
-  /** @deprecated Use `paths` instead. */
+  /** @deprecated Use `includes` instead. */
   pathStartsWith?: string
-  paths: string[]
+  includes: string[]
   excludes: string[]
 
   remote: {
@@ -130,7 +130,7 @@ export function createConfig(config: UserConfig): Config {
     workflowName: config.workflowName ?? 'ryu-cho',
     trackFrom: config.trackFrom,
     pathStartsWith: config.pathStartsWith,
-    paths: config.paths,
+    includes: config.includes,
     excludes: config.excludes,
 
     remote: {

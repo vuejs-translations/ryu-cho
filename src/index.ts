@@ -16,7 +16,7 @@ const config = createConfig({
   workflowName: core.getInput('workflow-name'),
   trackFrom: core.getInput('track-from', { required: true }),
   pathStartsWith: core.getInput('path-starts-with'),
-  paths: core.getMultilineInput('paths'),
+  includes: core.getMultilineInput('includes'),
 })
 
 const ryuCho = new RyuCho(config)

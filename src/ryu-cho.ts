@@ -98,7 +98,7 @@ export class RyuCho {
   }
 
   protected async containsValidFile(feed: Feed, hash: string) {
-    if (!this.config.pathStartsWith && !this.config.paths) {
+    if (!this.config.pathStartsWith && !this.config.includes) {
       return true
     }
 
@@ -114,10 +114,10 @@ export class RyuCho {
       })
     }
 
-    if (this.config.paths?.length) {
+    if (this.config.includes?.length) {
       const findFile = (filename: string) => {
         const { excludes } = this.config
-        return this.config.paths.some((pattern) => {
+        return this.config.includes.some((pattern) => {
           let matched = minimatch(filename, pattern)
           if (excludes?.length) {
             matched &&= !excludes.some((exclude) => {
