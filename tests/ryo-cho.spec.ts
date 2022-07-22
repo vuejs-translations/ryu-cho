@@ -69,7 +69,7 @@ function makeRyuCho(config: Partial<Config>, filenames: string[]) {
 }
 
 describe('RyuCho', () => {
-  it('containsValidFile matches single config.includes[]', () => {
+  it('containsValidFile matches single config.includes[]', async () => {
     const includes = ['/docs/**/*.md']
     const filenames = [
       '/docs/guide/index.md',
@@ -79,10 +79,10 @@ describe('RyuCho', () => {
     const ryuCho = makeRyuCho({ includes }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
-    expect(hasValidFile).resolves.toBe(true)
+    await expect(hasValidFile).resolves.toBe(true)
   })
 
-  it('containsValidFile does not match any config.includes[]', () => {
+  it('containsValidFile does not match any config.includes[]', async () => {
     const includes = ['/docs/**/*.md']
     const filenames = [
       '/docs/guide/index.txt',
@@ -92,10 +92,10 @@ describe('RyuCho', () => {
     const ryuCho = makeRyuCho({ includes }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
-    expect(hasValidFile).resolves.toBe(false)
+    await expect(hasValidFile).resolves.toBe(false)
   })
 
-  it('containsValidFile matches multiple config.includes[]', () => {
+  it('containsValidFile matches multiple config.includes[]', async () => {
     const includes = ['/docs/**/*.md', '/README.md']
     const filenames = [
       '/docs/guide/index.md',
@@ -105,10 +105,10 @@ describe('RyuCho', () => {
     const ryuCho = makeRyuCho({ includes }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
-    expect(hasValidFile).resolves.toBe(true)
+    await expect(hasValidFile).resolves.toBe(true)
   })
 
-  it('containsValidFile excludes specified config.includes[]', () => {
+  it('containsValidFile excludes specified config.includes[]', async () => {
     // match all *.md files except README.md
     const includes = ['**/!(README).md']
     const filenames = [
@@ -119,10 +119,10 @@ describe('RyuCho', () => {
     const ryuCho = makeRyuCho({ includes }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
-    expect(hasValidFile).resolves.toBe(false)
+    await expect(hasValidFile).resolves.toBe(false)
   })
 
-  it('containsValidFile excludes specified config.excludes[]', () => {
+  it('containsValidFile excludes specified config.excludes[]', async () => {
     const includes = ['**/*.md']
     const filenames = [
       '/README.md',
@@ -131,6 +131,6 @@ describe('RyuCho', () => {
     const ryuCho = makeRyuCho({ includes, excludes }, filenames)
 
     const hasValidFile = ryuCho.containsValidFile(DEFAULT_FEED, 'hash')
-    expect(hasValidFile).resolves.toBe(false)
+    await expect(hasValidFile).resolves.toBe(false)
   })
 })
