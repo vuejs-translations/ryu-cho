@@ -29,7 +29,10 @@ inputs:
     description: 'The git commit to track from. e.g. 4ed8b2f83a2f149734f3c5ecb6438309bd85a9e5'
     required: true
   path-starts-with:
-    description: 'File path to track. e.g `docs/`'
+    description: 'File path to track. e.g `docs/` (deprecated: use `includes` instead)'
+    required: false
+  includes:
+    description: 'File paths to track (glob patterns)'
     required: false
   workflow-name:
     description: 'GitHub workflow name that executes Ryu Cho action. Defaults to `ryu-cho`'

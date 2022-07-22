@@ -54,7 +54,11 @@ jobs:
 
           # File path to track. In this example, Ryu-Cho will only track
           # commits that modified files under `docs` folder. Optional.
+          # (deprecated: use `includes` instead)
           path-starts-with: docs/
+
+          # File paths to track (glob patterns). Optional.
+          includes: []
 
           # GitHub workflow name that runs Ryu-Cho. This is required since
           # Ryu-Cho determines the last run by looking into last workflow

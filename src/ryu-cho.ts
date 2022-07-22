@@ -115,21 +115,12 @@ export class RyuCho {
     }
 
     if (this.config.includes?.length) {
-      const findFile = (filename: string) => {
-        const { excludes } = this.config
-        return this.config.includes.some((pattern) => {
-          let matched = minimatch(filename, pattern)
-          if (excludes?.length) {
-            matched &&= !excludes.some((exclude) => {
-              return minimatch(filename, exclude, { nonegate: true })
-            })
-          }
-          return matched
-        })
+      const isFileIncluded = (filename: string) => {
+        return this.config.includes.some((pattern) => minimatch(filename, pattern))
       }
 
       hasValidFile = res.data.files!.some((file) => {
-        return findFile(file.filename!)
+        return isFileIncluded(file.filename!)
       })
     }
 
