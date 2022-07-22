@@ -9,6 +9,7 @@
     "test:ui": "yarn lint && vitest --ui"
   },
   "dependencies": {
+    "@actions/core": "^1.9.0",
     "@octokit/rest": "^18.3.0",
     "@types/node": "^14.14.31",
     "@types/shelljs": "^0.8.8",

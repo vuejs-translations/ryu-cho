@@ -1,25 +1,18 @@
-import { assert } from './utils'
 import { createConfig } from './config'
 import { RyuCho } from './ryu-cho'
-
-assert(!!process.env.ACCESS_TOKEN, '`accessToken` is required.')
-assert(!!process.env.USER_NAME, '`userName` is required.')
-assert(!!process.env.EMAIL, '`email` is required.')
-assert(!!process.env.UPSTREAM_REPO, '`upstreamRepo` is required.')
-assert(!!process.env.HEAD_REPO, '`headRepo` is required.')
-assert(!!process.env.TRACK_FROM, '`trackFrom` is required.')
+import core from '@actions/core'
 
 const config = createConfig({
-  accessToken: process.env.ACCESS_TOKEN!,
-  userName: process.env.USER_NAME!,
-  email: process.env.EMAIL!,
-  upstreamRepo: process.env.UPSTREAM_REPO!,
-  upstreamRepoBranch: process.env.UPSTREAM_REPO_BRANCH,
-  headRepo: process.env.HEAD_REPO!,
-  headRepoBranch: process.env.HEAD_REPO_BRANCH,
-  workflowName: process.env.WORKFLOW_NAME,
-  trackFrom: process.env.TRACK_FROM!,
-  pathStartsWith: process.env.PATH_STARTS_WITH
+  accessToken: core.getInput('access-token', { required: true }),
+  userName: core.getInput('username', { required: true }),
+  email: core.getInput('email', { required: true }),
+  upstreamRepo: core.getInput('upstream-repo', { required: true }),
+  upstreamRepoBranch: core.getInput('upstream-repo-branch', { required: true }),
+  headRepo: core.getInput('head-repo', { required: true }),
+  headRepoBranch: core.getInput('head-repo-branch'),
+  workflowName: core.getInput('workflow-name'),
+  trackFrom: core.getInput('track-from', { required: true }),
+  pathStartsWith: core.getInput('path-starts-with'),
 })
 
 const ryuCho = new RyuCho(config)

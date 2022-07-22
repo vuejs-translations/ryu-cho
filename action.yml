@@ -43,17 +43,6 @@ runs:
       run: ${{ github.action_path }}/scripts/checkout.sh
       shell: bash
     - name: Run Ryu-Cho
-      env:
-        ACCESS_TOKEN: ${{ inputs.access-token }}
-        USER_NAME: ${{ inputs.username }}
-        EMAIL: ${{ inputs.email }}
-        UPSTREAM_REPO: ${{ inputs.upstream-repo }}
-        UPSTREAM_REPO_BRANCH: ${{ inputs.upstream-repo-branch }}
-        HEAD_REPO: ${{ inputs.head-repo }}
-        HEAD_REPO_BRANCH: ${{ inputs.head-repo-branch }}
-        TRACK_FROM: ${{ inputs.track-from }}
-        PATH_STARTS_WITH: ${{ inputs.path-starts-with }}
-        WORKFLOW_NAME: ${{ inputs.workflow-name }}
       run: |
         cd ryu-cho
         yarn install
