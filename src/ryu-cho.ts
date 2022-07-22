@@ -107,7 +107,7 @@ export class RyuCho {
     let hasValidFile = false
 
     if (this.config.pathStartsWith) {
-      log('W', 'pathStartsWith is deprecated. Use paths instead.')
+      log('W', '`path-starts-with` is deprecated. Use `includes` instead.')
 
       hasValidFile = res.data.files!.some((file) => {
         return file.filename!.startsWith(this.config.pathStartsWith!)
