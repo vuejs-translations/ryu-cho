@@ -1,6 +1,9 @@
+import { assert } from './utils'
 import { createConfig } from './config'
 import { RyuCho } from './ryu-cho'
 import core from '@actions/core'
+
+assert(typeof core !== 'undefined', `core is undefined, which probably means you're not running in a GitHub Action`)
 
 const config = createConfig({
   accessToken: core.getInput('access-token', { required: true }),
