@@ -3,7 +3,7 @@ import { Config, Remote } from './config'
 import { Rss } from './rss'
 import { GitHub } from './github'
 import { Repository } from './repository'
-import minimatch from 'minimatch'
+import micromatch from 'micromatch'
 
 export interface Feed {
   link: string
@@ -116,7 +116,7 @@ export class RyuCho {
 
     if (this.config.includes?.length) {
       const isFileIncluded = (filename: string) => {
-        return this.config.includes.some((pattern) => minimatch(filename, pattern))
+        return micromatch.isMatch(filename, this.config.includes)
       }
 
       hasValidFile = res.data.files!.some((file) => {
@@ -126,7 +126,7 @@ export class RyuCho {
 
     if (this.config.excludes?.length) {
       const isFileExcluded = (filename: string) => {
-        return this.config.excludes.some((pattern) => minimatch(filename, pattern))
+        return micromatch.isMatch(filename, this.config.excludes)
       }
 
       hasValidFile = res.data.files!.some((file) => {
