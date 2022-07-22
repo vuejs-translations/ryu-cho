@@ -60,6 +60,9 @@ jobs:
           # File paths to track (glob patterns). Optional.
           includes: []
 
+          # File paths to exclude from tracking (glob patterns). Optional.
+          excludes: []
+
           # GitHub workflow name that runs Ryu-Cho. This is required since
           # Ryu-Cho determines the last run by looking into last workflow
           # run timestamp. Optional. Defaults to `ryu-cho`.

@@ -17,6 +17,7 @@ const config = createConfig({
   trackFrom: core.getInput('track-from', { required: true }),
   pathStartsWith: core.getInput('path-starts-with'),
   includes: core.getMultilineInput('includes'),
+  excludes: core.getMultilineInput('excludes'),
 })
 
 const ryuCho = new RyuCho(config)

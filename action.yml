@@ -34,6 +34,9 @@ inputs:
   includes:
     description: 'File paths to track (glob patterns)'
     required: false
+  excludes:
+    description: 'File paths to exclude from tracking (glob patterns)'
+    required: false
   workflow-name:
     description: 'GitHub workflow name that executes Ryu Cho action. Defaults to `ryu-cho`'
     required: false
