@@ -3,8 +3,9 @@ import { Config, Remote } from './config'
 import { Rss } from './rss'
 import { GitHub } from './github'
 import { Repository } from './repository'
+import micromatch from 'micromatch'
 
-interface Feed {
+export interface Feed {
   link: string
   title: string
   contentSnippet: string
@@ -23,7 +24,6 @@ export class RyuCho {
     this.config = config
     this.upstream = config.remote.upstream
     this.head = config.remote.head
-
     this.rss = new Rss()
 
     this.github = new GitHub(config.accessToken)
@@ -98,15 +98,43 @@ export class RyuCho {
   }
 
   protected async containsValidFile(feed: Feed, hash: string) {
-    if (!this.config.pathStartsWith) {
+    if (!this.config.pathStartsWith && !this.config.includes && !this.config.excludes) {
       return true
     }
 
     const res = await this.github.getCommit(this.head, hash)
 
-    return res.data.files!.some((file) => {
-      return file.filename!.startsWith(this.config.pathStartsWith!)
-    })
+    let hasValidFile = false
+
+    if (this.config.pathStartsWith) {
+      log('W', '`path-starts-with` is deprecated. Use `includes` instead.')
+
+      hasValidFile = res.data.files!.some((file) => {
+        return file.filename!.startsWith(this.config.pathStartsWith!)
+      })
+    }
+
+    if (this.config.includes?.length) {
+      const isFileIncluded = (filename: string) => {
+        return micromatch.isMatch(filename, this.config.includes)
+      }
+
+      hasValidFile = res.data.files!.some((file) => {
+        return isFileIncluded(file.filename!)
+      })
+    }
+
+    if (this.config.excludes?.length) {
+      const isFileExcluded = (filename: string) => {
+        return micromatch.isMatch(filename, this.config.excludes)
+      }
+
+      hasValidFile = res.data.files!.some((file) => {
+        return !isFileExcluded(file.filename!)
+      })
+    }
+
+    return hasValidFile
   }
 
   protected async createIssueIfNot(feed: Feed, hash: string) {
