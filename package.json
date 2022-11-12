@@ -4,9 +4,9 @@
     "start": "ts-node src/index.ts",
     "lint": "prettier --check --write --parser typescript \"{src,test}/**/*.ts\"",
     "lint:fail": "prettier --check --parser typescript \"{src,test}/**/*.ts\"",
-    "vitest": "vitest",
-    "test": "yarn lint && vitest",
-    "test:ui": "yarn lint && vitest --ui"
+    "vitest": "vitest --coverage",
+    "test": "yarn lint && vitest --coverage",
+    "test:ui": "yarn lint && vitest --coverage --ui"
   },
   "dependencies": {
     "@octokit/rest": "^18.3.0",
