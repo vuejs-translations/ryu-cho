@@ -1,4 +1,5 @@
 import * as Utils from 'src/utils'
+import { describe, it, expect } from 'vitest'
 
 describe('utils', () => {
   const https = 'https://github.com/vuejs/vuejs.org'
