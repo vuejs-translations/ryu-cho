@@ -4,9 +4,9 @@
     "start": "ts-node src/index.ts",
     "lint": "prettier --check --write --parser typescript \"{src,test}/**/*.ts\"",
     "lint:fail": "prettier --check --parser typescript \"{src,test}/**/*.ts\"",
-    "vitest": "vitest",
-    "test": "yarn lint && vitest",
-    "test:ui": "yarn lint && vitest --ui"
+    "vitest": "vitest --coverage",
+    "test": "yarn lint && vitest --coverage",
+    "test:ui": "yarn lint && vitest --coverage --ui"
   },
   "dependencies": {
     "@actions/core": "^1.9.0",
@@ -21,8 +21,8 @@
     "typescript": "^4.2.2"
   },
   "devDependencies": {
-    "@vitest/ui": "^0.18.1",
+    "@vitest/ui": "^0.25.1",
     "prettier": "^2.2.1",
-    "vitest": "^0.18.1"
+    "vitest": "^0.25.1"
   }
 }
